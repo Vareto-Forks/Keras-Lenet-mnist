@@ -12,8 +12,7 @@ class LeNet:
         model = Sequential()
 
         # first set of CONV => RELU => POOL
-        model.add(Convolution2D(20, 5, 5, border_mode="same",
-            input_shape=(depth, height, width)))
+        model.add(Convolution2D(20, 5, 5, border_mode="same", input_shape=(depth, height, width)))
         model.add(Activation("relu"))
         model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 

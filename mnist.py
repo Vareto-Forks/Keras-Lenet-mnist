@@ -29,21 +29,17 @@ testLabels = np_utils.to_categorical(testLabels, 10)
 # initialize the optimizer and model
 print("[INFO] compiling model...")
 opt = SGD(lr=0.01)
-model = LeNet.build(width=28, height=28, depth=1, classes=10,
-	weightsPath=weightsPath)
-model.compile(loss="categorical_crossentropy", optimizer=opt,
-	metrics=["accuracy"])
+model = LeNet.build(width=28, height=28, depth=1, classes=10, weightsPath=weightsPath)
+model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
 
 # if no weights specified train the model
 if weightsPath is None:
 	print("[INFO] training...")
-	model.fit(trainData, trainLabels, batch_size=128, nb_epoch=20,
-		verbose=1)
+	model.fit(trainData, trainLabels, batch_size=128, nb_epoch=20, verbose=1)
 
 	# show the accuracy on the testing set
 	print("[INFO] evaluating...")
-	(loss, accuracy) = model.evaluate(testData, testLabels,
-		batch_size=128, verbose=1)
+	(loss, accuracy) = model.evaluate(testData, testLabels, batch_size=128, verbose=1)
 	print("[INFO] accuracy: {:.2f}%".format(accuracy * 100))
 
 	print("[INFO] dumping weights to file...")
@@ -59,11 +55,9 @@ for i in np.random.choice(np.arange(0, len(testLabels)), size=(10,)):
 	image = (testData[i][0] * 255).astype("uint8")
 	image = cv2.merge([image] * 3)
 	image = cv2.resize(image, (96, 96), interpolation=cv2.INTER_LINEAR)
-	cv2.putText(image, str(prediction[0]), (5, 20),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+	cv2.putText(image, str(prediction[0]), (5, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
 
 	# show the image and prediction
-	print("[INFO] Predicted: {}, Actual: {}".format(prediction[0],
-		np.argmax(testLabels[i])))
+	print("[INFO] Predicted: {}, Actual: {}".format(prediction[0], np.argmax(testLabels[i])))
 	cv2.imshow("Digit", image)
 	cv2.waitKey(0)
