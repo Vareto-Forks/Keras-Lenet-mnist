@@ -31,7 +31,7 @@ print(x_train[0].shape)
 print("[INFO] compiling model...")
 opt = SGD(lr=0.01)
 model = LeNet.build(width=img_cols, height=img_rows, depth=1, classes=num_classes, weightsPath=weightsPath)
-model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
+model.compile(loss="categorical_crossentropy", optimizer='adadelta', metrics=["accuracy"])
 
 # if no weights specified train the model
 if weightsPath is None:
